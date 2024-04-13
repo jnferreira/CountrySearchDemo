@@ -5,9 +5,9 @@ FROM openjdk:11
 ARG TOMCAT_VERSION=9.0.50
 
 # Baixe e instale o Tomcat
-RUN wget https://downloads.apache.org/tomcat/tomcat-9/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz -O /tmp/tomcat.tar.gz
+RUN wget https://downloads.apache.org/tomcat/tomcat-10/v10.1.20/bin/apache-tomcat-10.1.20.tar.gz -O /tmp/tomcat.tar.gz
 RUN cd /opt && tar zxf /tmp/tomcat.tar.gz && rm /tmp/tomcat.tar.gz
-RUN mv /opt/apache-tomcat-${TOMCAT_VERSION} /opt/tomcat
+RUN mv /opt/apache-tomcat-10.1.20 /opt/tomcat
 
 # Defina as variáveis de ambiente
 ENV CATALINA_HOME /opt/tomcat
