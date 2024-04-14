@@ -3,6 +3,7 @@ package com.example.countrysearchdemo;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.servers.Server;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
@@ -23,16 +24,9 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public WebServerFactoryCustomizer<TomcatServletWebServerFactory> servletContainer() {
-        return server -> server.addConnectorCustomizers(connector -> {
-            connector.setRedirectPort(8443);
-        });
-    }
-
-    @Bean
-    public OpenAPI customOpenAPI() {
+    public OpenAPI customOpenAPI(@Value("${app.server-url}") String serverUrl, @Value("${app.version}") String appVersion) {
         return new OpenAPI()
-                .addServersItem(new Server().url("https://countrysearchdemo.onrender.com/CountrySearchDemo-0.0.1-SNAPSHOT"))
-                .info(new Info().title("Country Search Demo API").version("0.0.1-SNAPSHOT"));
+                .addServersItem(new Server().url(serverUrl))
+                .info(new Info().title("Country Search Demo API").version(appVersion));
     }
 }
