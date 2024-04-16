@@ -8,6 +8,7 @@ import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactor
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -24,9 +25,10 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public OpenAPI customOpenAPI(@Value("${app.server-url}") String serverUrl, @Value("${app.version}") String appVersion) {
+    @Profile("prod")
+    public OpenAPI customOpenAPI(@Value("${app.server-url}") String serverUrl) {
         return new OpenAPI()
                 .addServersItem(new Server().url(serverUrl))
-                .info(new Info().title("Country Search Demo API").version(appVersion));
+                .info(new Info().title("Country Search Demo API"));
     }
 }

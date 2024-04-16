@@ -13,7 +13,7 @@ RUN mvn dependency:go-offline -B
 COPY src ./src
 
 # Build the application
-RUN mvn clean package
+RUN mvn clean package -P prod
 
 # Stage 2: Run the application
 FROM openjdk:17

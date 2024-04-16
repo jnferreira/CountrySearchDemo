@@ -4,6 +4,6 @@ node {
   }
 
   stage("Build project with test execution") {
-    sh "./mvnw clean install"
+    sh "./mvnw clean install -Dspring.profiles.active=prod"
   }
 }
